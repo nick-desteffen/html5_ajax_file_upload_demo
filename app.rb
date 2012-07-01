@@ -1,12 +1,8 @@
 require 'sinatra/base'
-require 'json'
 require 'base64'
 
 class Application < Sinatra::Base
   
-  configure do
-  end
-
   get '/' do
     erb :index
   end
