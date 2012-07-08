@@ -2,6 +2,10 @@ require 'sinatra/base'
 require 'base64'
 
 class Application < Sinatra::Base
+
+  before do
+    log_parameters
+  end
   
   get '/' do
     erb :index
@@ -18,10 +22,17 @@ class Application < Sinatra::Base
     
     ## Write the file to the system
     file = File.new("public/uploads/#{filename}", "w+")
-    file.binmode
     file.write(decoded_image)
 
     "/uploads/#{filename}"
+  end
+
+  private
+
+  def log_parameters
+    params.each do |key, value|
+      puts "[#{key}] #{value} \n"
+    end
   end
 
 end
